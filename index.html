@@ -7,12 +7,12 @@
   <link rel="stylesheet" href="style/robots.css">
   <style>
     .service-title {
-      color: #000; /* bold black */
+      color: #000;
       font-weight: bold;
       font-size: 1.2rem;
     }
     .service-desc {
-      color: #00faff; /* glowing cyan */
+      color: #00faff;
       font-size: 1rem;
     }
     #typed {
@@ -28,6 +28,51 @@
       font-weight: bold;
       cursor: pointer;
     }
+    .menu-container {
+      position: relative;   /* anchor the menu to the dots */
+      z-index: 3000;        /* keep it above other content */
+    }
+
+    .menu {
+      position: absolute;
+      right: 0;
+      top: 40px;            /* drop it below the dots */
+      background: rgba(10, 10, 10, 0.95);
+      border: 1px solid #00faff;
+      border-radius: 8px;
+      list-style: none;
+      padding: 10px;
+      margin: 0;
+      box-shadow: 0 0 15px #00faff;
+      z-index: 4000;        /* ensure it’s visible */
+    }
+
+    .menu li {
+      margin: 5px 0;
+    }
+
+    .menu li a {
+      color: #00faff;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .menu li a:hover {
+      text-shadow: 0 0 10px #00faff;
+    }
+
+    .menu-dots {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px;
+      min-height: 44px;
+      user-select: none;
+      cursor: pointer;
+    }
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -36,7 +81,7 @@
     <div id="welcomeText">
       <h2 id="textSequence">Welcome to Botsmen.com</h2>
     </div>
-    <img id="robotLoader" src="assets/robots/loader/1.png" alt="Loading Robot" width="200px">
+    <img id="robotLoader" src="assets/robots/1.PNG" alt="Loading Robot" width="200px">
   </section>
 
   <!-- Main content -->
@@ -47,33 +92,50 @@
       <ul class="menu hidden" id="menuList">
         <li><a href="#" onclick="showSection('about')">About</a></li>
         <li><a href="#" onclick="showSection('services')">Services</a></li>
-        <li><a href="#" onclick="showSection('offer')">offers</a></li>
+        <li><a href="#" onclick="showSection('offer')">Offers</a></li>
       </ul>
     </div>
 
+  <script>
+  function toggleMenu() {
+    const menu = document.getElementById("menuList");
+    if (menu) menu.classList.toggle("hidden");
+  }
+  window.toggleMenu = toggleMenu;
+
+  function showSection(section) {
+    // your section logic
+  }
+  window.showSection = showSection;
+
+  function goBack() {
+    // restore vision section
+  }
+  window.goBack = goBack;
+  </script>
     <h1>Meet Botsmen: Your Robotic Business Partner</h1>
 
-    <!-- Vision windows stay as showcase -->
+    <!-- Vision windows -->
     <section class="vision hidden" id="visionSection">
-      <div class="window">
-        <img src="assets/robots/robot-wave.png" alt="Vision Robot">
-        <p>Our Vision: Empower businesses with robotics that blend intelligence and efficiency.</p>
-      </div>
-      <div class="window">
-        <img src="assets/robots/robot-hover.png" alt="Methodology Robot">
-        <p>Our Methodology: Smart automation combined with human insight for sustainable growth.</p>
-      </div>
-      <div class="window">
-        <img src="assets/robots/robot-laptop.png" alt="Speed Robot">
-        <p>Fasten Your Business: Accelerate workflows and decision-making with Botsmen’s robotic cycle.</p>
-      </div>
-      <div class="window">
-        <img src="assets/robots/robot-hologram.png" alt="Aim Robot">
-        <p>Our Aim: Deliver innovation, efficiency, and attractive solutions that scale with your goals.</p>
-      </div>
-    </section>
+        <div class="window">
+          <img src="assets/robots/robot-wave.PNG" alt="Vision Robot">
+          <p>Our Vision: Empower businesses with robotics that blend intelligence and efficiency.</p>
+        </div>
+        <div class="window">
+          <img src="assets/robots/robot-hover.PNG" alt="Methodology Robot">
+          <p>Our Methodology: Smart automation combined with human insight for sustainable growth.</p>
+        </div>
+        <div class="window">
+          <img src="assets/robots/robot-laptop.PNG" alt="Speed Robot">
+          <p>Fasten Your Business: Accelerate workflows and decision-making with Botsmen’s robotic cycle.</p>
+        </div>
+        <div class="window">
+          <img src="assets/robots/hologram.PNG" alt="Aim Robot">
+          <p>Our Aim: Deliver innovation, efficiency, and attractive solutions that scale with your goals.</p>
+        </div>
+      </section>
 
-    <!-- Separate section for menu actions -->
+    <!-- Menu content -->
     <section id="menuContent" class="hidden"></section>
   </header>
 
@@ -83,156 +145,158 @@
   <!-- Scripts -->
   <script src="scripts/loader.js"></script>
   <script src="scripts/script.js"></script>
-<script>
-function toggleMenu() {
-  const menu = document.getElementById("menuList");
-  menu.classList.toggle("hidden");
-}
-
-function showSection(section) {
-  // Hide heading + windows + dots
-  document.getElementById("visionSection").classList.add("hidden");
-  document.querySelector("h1").classList.add("hidden");
-  document.querySelector(".menu-dots").classList.add("hidden");
-  document.getElementById("menuList").classList.add("hidden");
-
-  const menuContent = document.getElementById("menuContent");
-  menuContent.innerHTML = ""; 
-  menuContent.classList.remove("hidden");
-
- if (section === "about") {
-  const aboutPoints = [
-    { title: "• A Domain for Everyone", desc: "Customers can reach your Botman directly, chat, and begin ordering from your shop instantly." },
-    { title: "• Smart Product Showcase", desc: "Use our ready-made product catalog — you just set your prices. Upload details and images if you want, or simply choose your business category and start receiving orders." },
-    { title: "• Seamless Ordering Experience", desc: "Shoppers interact naturally with your Botman, adding products to their cart and placing orders in real time." },
-    { title: "• Orders Dashboard", desc: "Monitor, track, and receive orders through a clear interface that keeps you in control." },
-    { title: "• Innovation from Egypt", desc: "This is a new chapter in commerce — let’s build our digital pyramid together." }
-  ];
-
-  typeWriterAbout(aboutPoints, document.getElementById("menuContent"));
-}
- else if (section === "services") {
-    const services = [
-      { title: "• Digital Business Platforms", desc: "Build scalable online systems for shops and enterprises." },
-      { title: "• Smart Automation Workflows", desc: "Intelligent bots that handle repetitive tasks and adapt to change." },
-      { title: "• Cloud-Powered Hosting", desc: "Deploy applications globally with speed and reliability." },
-      { title: "• Interactive Dashboards", desc: "Real-time insights with customizable glowing panels." },
-      { title: "• Developer-Friendly Ecosystem", desc: "Modular codebase, clear contracts, and collaborative workflows." },
-      { title: "• Enhanced Security Layer", desc: "Encrypted channels, role-based access, and automated alerts." }
+  <script>
+    // Loader animation
+    const frames = [
+      "assets/robots/1.PNG",
+      "assets/robots/2.PNG",
+      "assets/robots/3.PNG",
+      "assets/robots/4.PNG"
     ];
-    typeWriterServices(services, menuContent);
-  } else if (section === "offer") {
-  const menuContent = document.getElementById("menuContent");
-  menuContent.innerHTML = `
-    <h2>Get an Offer</h2>
-    <p>Tell us about your needs and we’ll reply as soon as possible.</p>
-    <form id="offerForm">
-      <label for="email"><b>Email:</b></label><br>
-      <input type="email" id="email" name="email" required><br><br>
+    let i = 0;
+    const loaderImg = document.getElementById("robotLoader");
+    const textSequence = document.getElementById("textSequence");
 
-      <label for="query"><b>Your Query:</b></label><br>
-      <textarea id="query" name="query" rows="4" required></textarea><br><br>
-
-      <button type="submit">Submit</button>
-      <button type="button" onclick="goBack()">Back</button>
-    </form>
-  `;
-  menuContent.classList.remove("hidden");
-
-  // Simple form handler
-  document.getElementById("offerForm").onsubmit = function(e) {
-    e.preventDefault();
-    alert("Thank you! We’ll reply to your email soon.");
-    goBack();
-  };
-}
-
-}
-
-function typeWriter(text, element) {
-  let i = 0;
-  element.innerHTML = "<div id='typed'></div><button onclick='goBack()'>Back</button>";
-  const typedDiv = document.getElementById("typed");
-
-  function typing() {
-    if (i < text.length) {
-      typedDiv.innerHTML += text.charAt(i);
+    const interval = setInterval(() => {
+      loaderImg.src = frames[i];
       i++;
-      setTimeout(typing, 50);
+      if (i >= frames.length) {
+        clearInterval(interval);
+        textSequence.className = "line";
+        setTimeout(() => textSequence.className = "zigzag", 1000);
+        setTimeout(() => textSequence.className = "glow", 2000);
+        setTimeout(() => {
+          const loader = document.getElementById("loader");
+          loader.style.transition = "opacity 1s ease";
+          loader.style.opacity = 0;
+          setTimeout(() => {
+            loader.style.display = "none";
+            document.getElementById("mainContent").classList.remove("hidden");
+          }, 1000);
+        }, 4000);
+      }
+    }, 500);
+
+    // Show sections
+    function showSection(section) {
+      document.getElementById("visionSection").classList.add("hidden");
+      document.querySelector("h1").classList.add("hidden");
+      document.querySelector(".menu-dots").classList.add("hidden");
+      document.getElementById("menuList").classList.add("hidden");
+
+      const menuContent = document.getElementById("menuContent");
+      menuContent.innerHTML = "";
+      menuContent.classList.remove("hidden");
+
+      if (section === "about") {
+        const aboutPoints = [
+          { title: "• A Domain for Everyone", desc: "Customers can reach your Botman directly, chat, and begin ordering from your shop instantly." },
+          { title: "• Smart Product Showcase", desc: "Use our ready-made product catalog — you just set your prices." },
+          { title: "• Seamless Ordering Experience", desc: "Shoppers interact naturally with your Botman, adding products to their cart and placing orders in real time." },
+          { title: "• Orders Dashboard", desc: "Monitor, track, and receive orders through a clear interface that keeps you in control." },
+          { title: "• Innovation from Egypt", desc: "This is a new chapter in commerce — let’s build our digital pyramid together." }
+        ];
+        typeWriterAbout(aboutPoints, menuContent);
+      } else if (section === "services") {
+        const services = [
+          { title: "• Digital Business Platforms", desc: "Build scalable online systems for shops and enterprises." },
+          { title: "• Smart Automation Workflows", desc: "Intelligent bots that handle repetitive tasks and adapt to change." },
+          { title: "• Cloud-Powered Hosting", desc: "Deploy applications globally with speed and reliability." },
+          { title: "• Interactive Dashboards", desc: "Real-time insights with customizable glowing panels." },
+          { title: "• Developer-Friendly Ecosystem", desc: "Modular codebase, clear contracts, and collaborative workflows." },
+          { title: "• Enhanced Security Layer", desc: "Encrypted channels, role-based access, and automated alerts." }
+        ];
+        typeWriterServices(services, menuContent);
+      } else if (section === "offer") {
+        menuContent.innerHTML = `
+          <h2>Get an Offer</h2>
+          <p>Tell us about your needs and we’ll reply as soon as possible.</p>
+          <form id="offerForm">
+            <label for="email"><b>Email:</b></label><br>
+            <input type="email" id="email" name="email" required><br><br>
+            <label for="query"><b>Your Query:</b></label><br>
+            <textarea id="query" name="query" rows="4" required></textarea><br><br>
+            <button type="submit">Submit</button>
+            <button type="button" onclick="goBack()">Back</button>
+          </form>
+        `;
+        document.getElementById("offerForm").onsubmit = function(e) {
+          e.preventDefault();
+          alert("Thank you! We’ll reply to your email soon.");
+          goBack();
+        };
+      }
     }
-  }
-  typing();
-}
+    window.showSection = showSection;
 
-function typeWriterServices(services, element) {
-  element.innerHTML = "<div id='typed'></div><button onclick='goBack()'>Back</button>";
-  const typedDiv = document.getElementById("typed");
+    // Typewriter helpers
+    function typeWriterAbout(points, element) {
+      element.innerHTML = "<div id='typed'></div><button onclick='goBack()'>Back</button>";
+      const typedDiv = document.getElementById("typed");
+      let pointIndex = 0;
 
-  let serviceIndex = 0;
+      function showNextPoint() {
+        if (pointIndex < points.length) {
+          const { title, desc } = points[pointIndex];
+          const block = document.createElement("div");
+          block.innerHTML = `<b class="service-title">${title}</b><br><span class="service-desc"></span>`;
+          typedDiv.appendChild(block);
 
-  function showNextService() {
-    if (serviceIndex < services.length) {
-      const { title, desc } = services[serviceIndex];
-      const block = document.createElement("div");
-      block.innerHTML = `<b class="service-title">${title}</b><br><span class="service-desc"></span>`;
-      typedDiv.appendChild(block);
-
-      const descSpan = block.querySelector(".service-desc");
-      let i = 0;
-      function typing() {
-        if (i < desc.length) {
-          descSpan.innerHTML += desc.charAt(i);
-          i++;
-          setTimeout(typing, 40);
-        } else {
-          serviceIndex++;
-          setTimeout(showNextService, 600);
+          const descSpan = block.querySelector(".service-desc");
+          let i = 0;
+          function typing() {
+            if (i < desc.length) {
+              descSpan.innerHTML += desc.charAt(i);
+              i++;
+              setTimeout(typing, 40); // typing speed
+            } else {
+              pointIndex++;
+              setTimeout(showNextPoint, 600); // delay before next point
+            }
+          }
+          typing();
         }
       }
-      typing();
+      showNextPoint();
     }
-  }
-  showNextService();
-}
-function typeWriterAbout(points, element) {
-  element.innerHTML = "<div id='typed'></div><button onclick='goBack()'>Back</button>";
-  const typedDiv = document.getElementById("typed");
 
-  let pointIndex = 0;
+    function typeWriterServices(services, element) {
+      element.innerHTML = "<div id='typed'></div><button onclick='goBack()'>Back</button>";
+      const typedDiv = document.getElementById("typed");
+      let serviceIndex = 0;
 
-  function showNextPoint() {
-    if (pointIndex < points.length) {
-      const { title, desc } = points[pointIndex];
-      const block = document.createElement("div");
-      block.innerHTML = `<b class="service-title">${title}</b><br><span class="service-desc"></span>`;
-      typedDiv.appendChild(block);
+      function showNextService() {
+        if (serviceIndex < services.length) {
+          const { title, desc } = services[serviceIndex];
+          const block = document.createElement("div");
+          block.innerHTML = `<b class="service-title">${title}</b><br><span class="service-desc"></span>`;
+          typedDiv.appendChild(block);
 
-      const descSpan = block.querySelector(".service-desc");
-      let i = 0;
-      function typing() {
-        if (i < desc.length) {
-          descSpan.innerHTML += desc.charAt(i);
-          i++;
-          setTimeout(typing, 40); // typing speed
-        } else {
-          pointIndex++;
-          setTimeout(showNextPoint, 600); // delay before next point
+          const descSpan = block.querySelector(".service-desc");
+          let i = 0;
+          function typing() {
+            if (i < desc.length) {
+              descSpan.innerHTML += desc.charAt(i);
+              i++;
+              setTimeout(typing, 40);
+            } else {
+              serviceIndex++;
+              setTimeout(showNextService, 600);
+            }
+          }
+          typing();
         }
       }
-      typing();
+      showNextService();
     }
-  }
 
-  showNextPoint();
-}
-
-
-function goBack() {
-  document.getElementById("visionSection").classList.remove("hidden");
-  document.querySelector("h1").classList.remove("hidden");
-  document.querySelector(".menu-dots").classList.remove("hidden");
-  document.getElementById("menuContent").classList.add("hidden");
-}
-</script>
+    function goBack() {
+      document.getElementById("visionSection").classList.remove("hidden");
+      document.querySelector("h1").classList.remove("hidden");
+      document.querySelector(".menu-dots").classList.remove("hidden");
+      document.getElementById("menuContent").classList.add("hidden");
+    }
+    window.goBack = goBack;
+  </script>
 </body>
 </html>
