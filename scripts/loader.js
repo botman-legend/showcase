@@ -1,8 +1,8 @@
 const frames = [
-  "assets/robots/loader/1.png",
-  "assets/robots/loader/2.png",
-  "assets/robots/loader/3.png",
-  "assets/robots/loader/4.png"
+  "assets/robots/1.PNG",
+  "assets/robots/2.PNG",
+  "assets/robots/3.PNG",
+  "assets/robots/4.PNG"
 ];
 
 let i = 0;
