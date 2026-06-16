@@ -5,9 +5,78 @@
   <title>Botsmen Showcase</title>
   <link rel="stylesheet" href="style/main.css">
   <link rel="stylesheet" href="style/robots.css">
+    <style>
+    .service-title {
+      color: #000;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    .service-desc {
+      color: #00faff;
+      font-size: 1rem;
+    }
+    #typed {
+      margin-top: 20px;
+    }
+    #menuContent button {
+      margin-top: 20px;
+      padding: 8px 16px;
+      background: #00faff;
+      border: none;
+      border-radius: 4px;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .menu-container {
+      position: relative;   /* anchor the menu to the dots */
+      z-index: 3000;        /* keep it above other content */
+    }
+
+    .menu {
+      position: absolute;
+      right: 0;
+      top: 40px;            /* drop it below the dots */
+      background: rgba(10, 10, 10, 0.95);
+      border: 1px solid #00faff;
+      border-radius: 8px;
+      list-style: none;
+      padding: 10px;
+      margin: 0;
+      box-shadow: 0 0 15px #00faff;
+      z-index: 4000;        /* ensure it’s visible */
+    }
+
+    .menu li {
+      margin: 5px 0;
+    }
+
+    .menu li a {
+      color: #00faff;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .menu li a:hover {
+      text-shadow: 0 0 10px #00faff;
+    }
+
+    .menu-dots {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px;
+      min-height: 44px;
+      user-select: none;
+      cursor: pointer;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 <body>
-  <!-- Loader -->
+  <!-- Loader section -->
   <section id="loader">
     <div id="welcomeText">
       <h2 id="textSequence">Welcome to Botsmen.com</h2>
@@ -17,7 +86,7 @@
 
   <!-- Main content -->
   <header id="mainContent">
-    <!-- Menu dots -->
+    <!-- Three dots menu -->
     <div class="menu-container">
       <div class="menu-dots" onclick="toggleMenu()">&#8942;</div>
       <ul class="menu hidden" id="menuList">
@@ -33,7 +102,7 @@
       <p>Explore innovation, automation, and smart commerce with Botsmen.</p>
     </div>
 
-    <!-- Menu content (hidden until choice is clicked) -->
+    <!-- Menu content (hidden until a choice is clicked) -->
     <div id="menuContent" class="hidden"></div>
   </header>
 
@@ -99,12 +168,14 @@
       element.innerHTML = "<div id='typed'></div><button onclick='goBack()'>Back</button>";
       const typedDiv = document.getElementById("typed");
       let pointIndex = 0;
+
       function showNextPoint() {
         if (pointIndex < points.length) {
           const { title, desc } = points[pointIndex];
           const block = document.createElement("div");
           block.innerHTML = `<b class="service-title">${title}</b><br><span class="service-desc"></span>`;
           typedDiv.appendChild(block);
+
           const descSpan = block.querySelector(".service-desc");
           let i = 0;
           function typing() {
@@ -127,12 +198,14 @@
       element.innerHTML = "<div id='typed'></div><button onclick='goBack()'>Back</button>";
       const typedDiv = document.getElementById("typed");
       let serviceIndex = 0;
+
       function showNextService() {
         if (serviceIndex < services.length) {
           const { title, desc } = services[serviceIndex];
           const block = document.createElement("div");
           block.innerHTML = `<b class="service-title">${title}</b><br><span class="service-desc"></span>`;
           typedDiv.appendChild(block);
+
           const descSpan = block.querySelector(".service-desc");
           let i = 0;
           function typing() {
