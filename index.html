@@ -5,7 +5,7 @@
   <title>Botsmen Showcase</title>
   <link rel="stylesheet" href="style/main.css">
   <link rel="stylesheet" href="style/robots.css">
-    <style>
+      <style>
     .service-title {
       color: #000;
       font-weight: bold;
@@ -76,7 +76,7 @@
   </style>
 </head>
 <body>
-  <!-- Loader section -->
+  <!-- Loader -->
   <section id="loader">
     <div id="welcomeText">
       <h2 id="textSequence">Welcome to Botsmen.com</h2>
@@ -86,7 +86,7 @@
 
   <!-- Main content -->
   <header id="mainContent">
-    <!-- Three dots menu -->
+    <!-- Menu dots -->
     <div class="menu-container">
       <div class="menu-dots" onclick="toggleMenu()">&#8942;</div>
       <ul class="menu hidden" id="menuList">
@@ -102,7 +102,7 @@
       <p>Explore innovation, automation, and smart commerce with Botsmen.</p>
     </div>
 
-    <!-- Menu content (hidden until a choice is clicked) -->
+    <!-- Menu content (hidden until choice is clicked) -->
     <div id="menuContent" class="hidden"></div>
   </header>
 
@@ -168,14 +168,12 @@
       element.innerHTML = "<div id='typed'></div><button onclick='goBack()'>Back</button>";
       const typedDiv = document.getElementById("typed");
       let pointIndex = 0;
-
       function showNextPoint() {
         if (pointIndex < points.length) {
           const { title, desc } = points[pointIndex];
           const block = document.createElement("div");
           block.innerHTML = `<b class="service-title">${title}</b><br><span class="service-desc"></span>`;
           typedDiv.appendChild(block);
-
           const descSpan = block.querySelector(".service-desc");
           let i = 0;
           function typing() {
@@ -198,14 +196,12 @@
       element.innerHTML = "<div id='typed'></div><button onclick='goBack()'>Back</button>";
       const typedDiv = document.getElementById("typed");
       let serviceIndex = 0;
-
       function showNextService() {
         if (serviceIndex < services.length) {
           const { title, desc } = services[serviceIndex];
           const block = document.createElement("div");
           block.innerHTML = `<b class="service-title">${title}</b><br><span class="service-desc"></span>`;
           typedDiv.appendChild(block);
-
           const descSpan = block.querySelector(".service-desc");
           let i = 0;
           function typing() {
