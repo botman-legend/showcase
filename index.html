@@ -5,7 +5,7 @@
   <title>Botsmen Showcase</title>
   <link rel="stylesheet" href="style/main.css">
   <link rel="stylesheet" href="style/robots.css">
-  <style>
+    <style>
     .service-title {
       color: #000;
       font-weight: bold;
@@ -77,7 +77,7 @@
 </head>
 <body>
   <!-- Loader section -->
-  <section class="loader" id="loader">
+  <section id="loader">
     <div id="welcomeText">
       <h2 id="textSequence">Welcome to Botsmen.com</h2>
     </div>
@@ -85,7 +85,7 @@
   </section>
 
   <!-- Main content -->
-  <header class="hero" id="mainContent">
+  <header id="mainContent">
     <!-- Three dots menu -->
     <div class="menu-container">
       <div class="menu-dots" onclick="toggleMenu()">&#8942;</div>
@@ -96,87 +96,23 @@
       </ul>
     </div>
 
-    <h1>Meet Botsmen: Your Robotic Business Partner</h1>
-    <script>
+    <!-- Vision section (initial view) -->
+    <div id="visionSection">
+      <h1>Meet Botsmen: Your Robotic Business Partner</h1>
+      <p>Explore innovation, automation, and smart commerce with Botsmen.</p>
+    </div>
+
+    <!-- Menu content (hidden until a choice is clicked) -->
+    <div id="menuContent" class="hidden"></div>
+  </header>
+
+  <script>
     function toggleMenu() {
       const menu = document.getElementById("menuList");
       if (menu) menu.classList.toggle("hidden");
     }
     window.toggleMenu = toggleMenu;
 
-    function showSection(section) {
-      // your section logic
-    }
-    window.showSection = showSection;
-
-    function goBack() {
-      // restore vision section
-    }
-    window.goBack = goBack;
-    </script>
-    <!-- Vision windows -->
-    <section class="vision hidden" id="visionSection">
-        <div class="window">
-          <img src="assets/robots/robot-wave.PNG" alt="Vision Robot">
-          <p>Our Vision: Empower businesses with robotics that blend intelligence and efficiency.</p>
-        </div>
-        <div class="window">
-          <img src="assets/robots/robot-hover.PNG" alt="Methodology Robot">
-          <p>Our Methodology: Smart automation combined with human insight for sustainable growth.</p>
-        </div>
-        <div class="window">
-          <img src="assets/robots/robot-laptop.PNG" alt="Speed Robot">
-          <p>Fasten Your Business: Accelerate workflows and decision-making with Botsmen’s robotic cycle.</p>
-        </div>
-        <div class="window">
-          <img src="assets/robots/hologram.PNG" alt="Aim Robot">
-          <p>Our Aim: Deliver innovation, efficiency, and attractive solutions that scale with your goals.</p>
-        </div>
-      </section>
-
-    <!-- Menu content -->
-    <section id="menuContent" class="hidden"></section>
-  </header>
-
-  <!-- Dashboard button -->
-  <button onclick="window.location.href='https://admin.botsmen.com'">Launch Dashboard</button>
-
-  <!-- Scripts -->
-  <script src="scripts/loader.js"></script>
-  <script src="scripts/script.js"></script>
-  <script>
-    // Loader animation
-    const frames = [
-      "assets/robots/1.PNG",
-      "assets/robots/2.PNG",
-      "assets/robots/3.PNG",
-      "assets/robots/4.PNG"
-    ];
-    let i = 0;
-    const loaderImg = document.getElementById("robotLoader");
-    const textSequence = document.getElementById("textSequence");
-
-    const interval = setInterval(() => {
-      loaderImg.src = frames[i];
-      i++;
-      if (i >= frames.length) {
-        clearInterval(interval);
-        textSequence.className = "line";
-        setTimeout(() => textSequence.className = "zigzag", 1000);
-        setTimeout(() => textSequence.className = "glow", 2000);
-        setTimeout(() => {
-          const loader = document.getElementById("loader");
-          loader.style.transition = "opacity 1s ease";
-          loader.style.opacity = 0;
-          setTimeout(() => {
-            loader.style.display = "none";
-            document.getElementById("mainContent").classList.remove("hidden");
-          }, 1000);
-        }, 4000);
-      }
-    }, 500);
-
-    // Show sections
     function showSection(section) {
       document.getElementById("visionSection").classList.add("hidden");
       document.querySelector("h1").classList.add("hidden");
@@ -189,7 +125,7 @@
 
       if (section === "about") {
         const aboutPoints = [
-          { title: "• A Domain for Everyone", desc: "Customers can reach your Botman directly, chat, and begin ordering from your shop instantly." },
+          { title: "• A Domain for Everyone", desc: "Customers can reach your Botman directly, chat, and begin ordering instantly." },
           { title: "• Smart Product Showcase", desc: "Use our ready-made product catalog — you just set your prices." },
           { title: "• Seamless Ordering Experience", desc: "Shoppers interact naturally with your Botman, adding products to their cart and placing orders in real time." },
           { title: "• Orders Dashboard", desc: "Monitor, track, and receive orders through a clear interface that keeps you in control." },
@@ -228,7 +164,6 @@
     }
     window.showSection = showSection;
 
-    // Typewriter helpers
     function typeWriterAbout(points, element) {
       element.innerHTML = "<div id='typed'></div><button onclick='goBack()'>Back</button>";
       const typedDiv = document.getElementById("typed");
@@ -247,10 +182,10 @@
             if (i < desc.length) {
               descSpan.innerHTML += desc.charAt(i);
               i++;
-              setTimeout(typing, 40); // typing speed
+              setTimeout(typing, 40);
             } else {
               pointIndex++;
-              setTimeout(showNextPoint, 600); // delay before next point
+              setTimeout(showNextPoint, 600);
             }
           }
           typing();
