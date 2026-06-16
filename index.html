@@ -95,18 +95,25 @@
         <li><a href="#" onclick="showSection('offer')">Offers</a></li>
       </ul>
     </div>
-    
-    <div id="visionSection">
-      <h1>Meet Botsmen: Your Robotic Business Partner</h1>
-      <!-- You can add intro text or images here -->
-    </div>
-  </header>
-  <script>
+
+    <h1>Meet Botsmen: Your Robotic Business Partner</h1>
+    <script>
     function toggleMenu() {
       const menu = document.getElementById("menuList");
       if (menu) menu.classList.toggle("hidden");
     }
-  </script>
+    window.toggleMenu = toggleMenu;
+
+    function showSection(section) {
+      // your section logic
+    }
+    window.showSection = showSection;
+
+    function goBack() {
+      // restore vision section
+    }
+    window.goBack = goBack;
+    </script>
     <!-- Vision windows -->
     <section class="vision hidden" id="visionSection">
         <div class="window">
@@ -127,8 +134,12 @@
         </div>
       </section>
 
+    <!-- Menu content -->
+    <section id="menuContent" class="hidden"></section>
+  </header>
+
   <!-- Dashboard button -->
-  <button onclick="window.location.href='https://admin.botsmen.com'">TRY DEMO</button>
+  <button onclick="window.location.href='https://admin.botsmen.com'">Launch Dashboard</button>
 
   <!-- Scripts -->
   <script src="scripts/loader.js"></script>
