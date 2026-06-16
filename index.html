@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Botsmen Showcase</title>
+  <link rel="stylesheet" href="style/main.css">
+  <link rel="stylesheet" href="style/robots.css">
+  <style>
+    .service-title {
+      color: #000; /* bold black */
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    .service-desc {
+      color: #00faff; /* glowing cyan */
+      font-size: 1rem;
+    }
+    #typed {
+      margin-top: 20px;
+    }
+    #menuContent button {
+      margin-top: 20px;
+      padding: 8px 16px;
+      background: #00faff;
+      border: none;
+      border-radius: 4px;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!-- Loader section -->
+  <section class="loader" id="loader">
+    <div id="welcomeText">
+      <h2 id="textSequence">Welcome to Botsmen.com</h2>
+    </div>
+    <img id="robotLoader" src="assets/robots/loader/1.png" alt="Loading Robot" width="200px">
+  </section>
+
+  <!-- Main content -->
+  <header class="hero hidden" id="mainContent">
+    <!-- Three dots menu -->
+    <div class="menu-container">
+      <div class="menu-dots" onclick="toggleMenu()">&#8942;</div>
+      <ul class="menu hidden" id="menuList">
+        <li><a href="#" onclick="showSection('about')">About</a></li>
+        <li><a href="#" onclick="showSection('services')">Services</a></li>
+        <li><a href="#" onclick="showSection('offer')">offers</a></li>
+      </ul>
+    </div>
+
+    <h1>Meet Botsmen: Your Robotic Business Partner</h1>
+
+    <!-- Vision windows stay as showcase -->
+    <section class="vision hidden" id="visionSection">
+      <div class="window">
+        <img src="assets/robots/robot-wave.png" alt="Vision Robot">
+        <p>Our Vision: Empower businesses with robotics that blend intelligence and efficiency.</p>
+      </div>
+      <div class="window">
+        <img src="assets/robots/robot-hover.png" alt="Methodology Robot">
+        <p>Our Methodology: Smart automation combined with human insight for sustainable growth.</p>
+      </div>
+      <div class="window">
+        <img src="assets/robots/robot-laptop.png" alt="Speed Robot">
+        <p>Fasten Your Business: Accelerate workflows and decision-making with Botsmen’s robotic cycle.</p>
+      </div>
+      <div class="window">
+        <img src="assets/robots/robot-hologram.png" alt="Aim Robot">
+        <p>Our Aim: Deliver innovation, efficiency, and attractive solutions that scale with your goals.</p>
+      </div>
+    </section>
+
+    <!-- Separate section for menu actions -->
+    <section id="menuContent" class="hidden"></section>
+  </header>
+
+  <!-- Dashboard button -->
+  <button onclick="window.location.href='https://admin.botsmen.com'">Launch Dashboard</button>
+
+  <!-- Scripts -->
+  <script src="scripts/loader.js"></script>
+  <script src="scripts/script.js"></script>
+<script>
+function toggleMenu() {
+  const menu = document.getElementById("menuList");
+  menu.classList.toggle("hidden");
+}
+
+function showSection(section) {
+  // Hide heading + windows + dots
+  document.getElementById("visionSection").classList.add("hidden");
+  document.querySelector("h1").classList.add("hidden");
+  document.querySelector(".menu-dots").classList.add("hidden");
+  document.getElementById("menuList").classList.add("hidden");
+
+  const menuContent = document.getElementById("menuContent");
+  menuContent.innerHTML = ""; 
+  menuContent.classList.remove("hidden");
+
+ if (section === "about") {
+  const aboutPoints = [
+    { title: "• A Domain for Everyone", desc: "Customers can reach your Botman directly, chat, and begin ordering from your shop instantly." },
+    { title: "• Smart Product Showcase", desc: "Use our ready-made product catalog — you just set your prices. Upload details and images if you want, or simply choose your business category and start receiving orders." },
+    { title: "• Seamless Ordering Experience", desc: "Shoppers interact naturally with your Botman, adding products to their cart and placing orders in real time." },
+    { title: "• Orders Dashboard", desc: "Monitor, track, and receive orders through a clear interface that keeps you in control." },
+    { title: "• Innovation from Egypt", desc: "This is a new chapter in commerce — let’s build our digital pyramid together." }
+  ];
+
+  typeWriterAbout(aboutPoints, document.getElementById("menuContent"));
+}
+ else if (section === "services") {
+    const services = [
+      { title: "• Digital Business Platforms", desc: "Build scalable online systems for shops and enterprises." },
+      { title: "• Smart Automation Workflows", desc: "Intelligent bots that handle repetitive tasks and adapt to change." },
+      { title: "• Cloud-Powered Hosting", desc: "Deploy applications globally with speed and reliability." },
+      { title: "• Interactive Dashboards", desc: "Real-time insights with customizable glowing panels." },
+      { title: "• Developer-Friendly Ecosystem", desc: "Modular codebase, clear contracts, and collaborative workflows." },
+      { title: "• Enhanced Security Layer", desc: "Encrypted channels, role-based access, and automated alerts." }
+    ];
+    typeWriterServices(services, menuContent);
+  } else if (section === "offer") {
+  const menuContent = document.getElementById("menuContent");
+  menuContent.innerHTML = `
+    <h2>Get an Offer</h2>
+    <p>Tell us about your needs and we’ll reply as soon as possible.</p>
+    <form id="offerForm">
+      <label for="email"><b>Email:</b></label><br>
+      <input type="email" id="email" name="email" required><br><br>
+
+      <label for="query"><b>Your Query:</b></label><br>
+      <textarea id="query" name="query" rows="4" required></textarea><br><br>
+
+      <button type="submit">Submit</button>
+      <button type="button" onclick="goBack()">Back</button>
+    </form>
+  `;
+  menuContent.classList.remove("hidden");
+
+  // Simple form handler
+  document.getElementById("offerForm").onsubmit = function(e) {
+    e.preventDefault();
+    alert("Thank you! We’ll reply to your email soon.");
+    goBack();
+  };
+}
+
+}
+
+function typeWriter(text, element) {
+  let i = 0;
+  element.innerHTML = "<div id='typed'></div><button onclick='goBack()'>Back</button>";
+  const typedDiv = document.getElementById("typed");
+
+  function typing() {
+    if (i < text.length) {
+      typedDiv.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing, 50);
+    }
+  }
+  typing();
+}
+
+function typeWriterServices(services, element) {
+  element.innerHTML = "<div id='typed'></div><button onclick='goBack()'>Back</button>";
+  const typedDiv = document.getElementById("typed");
+
+  let serviceIndex = 0;
+
+  function showNextService() {
+    if (serviceIndex < services.length) {
+      const { title, desc } = services[serviceIndex];
+      const block = document.createElement("div");
+      block.innerHTML = `<b class="service-title">${title}</b><br><span class="service-desc"></span>`;
+      typedDiv.appendChild(block);
+
+      const descSpan = block.querySelector(".service-desc");
+      let i = 0;
+      function typing() {
+        if (i < desc.length) {
+          descSpan.innerHTML += desc.charAt(i);
+          i++;
+          setTimeout(typing, 40);
+        } else {
+          serviceIndex++;
+          setTimeout(showNextService, 600);
+        }
+      }
+      typing();
+    }
+  }
+  showNextService();
+}
+function typeWriterAbout(points, element) {
+  element.innerHTML = "<div id='typed'></div><button onclick='goBack()'>Back</button>";
+  const typedDiv = document.getElementById("typed");
+
+  let pointIndex = 0;
+
+  function showNextPoint() {
+    if (pointIndex < points.length) {
+      const { title, desc } = points[pointIndex];
+      const block = document.createElement("div");
+      block.innerHTML = `<b class="service-title">${title}</b><br><span class="service-desc"></span>`;
+      typedDiv.appendChild(block);
+
+      const descSpan = block.querySelector(".service-desc");
+      let i = 0;
+      function typing() {
+        if (i < desc.length) {
+          descSpan.innerHTML += desc.charAt(i);
+          i++;
+          setTimeout(typing, 40); // typing speed
+        } else {
+          pointIndex++;
+          setTimeout(showNextPoint, 600); // delay before next point
+        }
+      }
+      typing();
+    }
+  }
+
+  showNextPoint();
+}
+
+
+function goBack() {
+  document.getElementById("visionSection").classList.remove("hidden");
+  document.querySelector("h1").classList.remove("hidden");
+  document.querySelector(".menu-dots").classList.remove("hidden");
+  document.getElementById("menuContent").classList.add("hidden");
+}
+</script>
+</body>
+</html>
